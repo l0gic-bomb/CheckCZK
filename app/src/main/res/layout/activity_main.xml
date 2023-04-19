@@ -1,18 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".MainActivity"
+              android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/hintTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выберите 1 дату"
+            android:textSize="24sp"
+            android:layout_marginRight="15sp"
+            android:layout_gravity="center"
+    />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+    />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  tools:context=".MainActivity"
+                  android:orientation="horizontal"
+                  android:gravity="center" >
+
+        <TextView
+                android:id="@+id/firstDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20sp"
+        />
+
+        <TextView
+                android:id="@+id/secnodDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_weight="1"
+                android:gravity="center"
+        />
+
+    </LinearLayout>
+
+    <Spinner
+            android:id="@+id/currenciesSpinner"
+            android:layout_width="match_parent"
+            android:tooltipText="Выберите валюту"
+            android:scrollbarSize="30sp"
+            android:layout_height="wrap_content" />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  tools:context=".MainActivity"
+                  android:orientation="horizontal"
+                  android:gravity="center" >
+
+
+
+        <Button
+                android:id="@+id/resetButton"
+                android:text="Сбросить"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight = "20dp"
+                android:textSize="14sp"
+        />
+
+        <Button
+                android:id="@+id/acceptButton"
+                android:text="Подтвердить"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft = "20dp"
+                android:textSize="14sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
