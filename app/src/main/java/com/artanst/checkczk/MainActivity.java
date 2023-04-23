@@ -13,12 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String[] KEYS = {"AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "DKK", "EUR", "GBP",
-            "HKD", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD",
-            "PHP", "PLN", "RON", "SEK", "SGD", "THB", "TRY", "USD", "XDR", "ZAR"};
+    public final String[] KEYS_CURRENCIES = {"AUD", "CAD", "EUR", "GBP", "NZD", "TRY", "USD"};
 
     private DatePicker datePicker;
     private TextView firstDate, secondDate, hint;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSpinner();
         setAcceptListener();
+        setResetListener();
 
     }
 
@@ -73,12 +73,16 @@ public class MainActivity extends AppCompatActivity {
                 else if (rightDate.isEmpty()) {
                     parser.rightYear = year;
                     secondDate.setText(date);
-                    hint.setText("Нажмите потвердить для формирования отчета");
+                    hint.setText("Нажмите подтвердить для формирования отчета");
                 }
                 else {
                     try {
-                        parser.parseRates();
+                        parser.getRates();
                     } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (ExecutionException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
@@ -87,11 +91,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setResetListener() {
-
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstDate.setText("");
+                secondDate.setText("");
+                hint.setText("Введите 1 дату");
+            }
+        });
     }
 
     private void setSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, KEYS)  {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, KEYS_CURRENCIES)  {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 TextView view = (TextView) super.getView(position, convertView, parent);
